@@ -329,7 +329,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-01 16:56:44" itemprop="dateModified" datetime="2022-06-01T16:56:44+08:00">2022-06-01</time>
+      <time title="Modified: 2022-06-11 09:27:17" itemprop="dateModified" datetime="2022-06-11T09:27:17+08:00">2022-06-11</time>
     </span>
 
   
@@ -1052,11 +1052,30 @@
 </ul>
 <h3 id="webpack5配置文件"><a href="#webpack5配置文件" class="headerlink" title="webpack5配置文件"></a><strong>webpack5配置文件</strong></h3><ul>
 <li><p>webpack5更新了配置文件，需要<strong>手动创建完成配置</strong>并命名为<code>webpack.cfg.js</code>放在根目录下，内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;main.js&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  	<span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>, <span class="comment">//开发模式，product是会压缩更小但是时间更长</span></span><br><span class="line">    <span class="attr">entry</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;./src/index.js&#x27;</span>),<span class="comment">//指定处理哪个文件</span></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;main.js&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="comment">//打包完成自动打开浏览器</span></span><br><span class="line">  <span class="attr">devServer</span>:&#123;</span><br><span class="line">    <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">//改变端口号</span></span><br><span class="line">    <span class="attr">port</span>: <span class="number">80</span>，</span><br><span class="line">    <span class="comment">//指定域名</span></span><br><span class="line">    <span class="attr">host</span>: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 <li><p>使用<code>npx</code>命令完成配置</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack --webpack.<span class="property">cfg</span>.<span class="property">js</span></span><br></pre></td></tr></table></figure></li>
 <li><p>使用命令完成打包</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack index.<span class="property">js</span></span><br></pre></td></tr></table></figure></li>
+<li><p>webpack实时更新插件<code>webpack-dev-sever</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack-dev-sever@<span class="number">3.11</span><span class="number">.2</span> -D</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在配置文件中dev中添加<code>sever</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dev</span>:<span class="string">&#x27;webpack sever&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用时注意，它会在内存中生成js文件，而不是在磁盘中，所以文件的引用路径应为根目录下的打包后的js文件，而不是相对路径下的js文件</p>
+</li>
+</ul>
+</li>
+<li><p>webpack复制<code>index.html</code>到根目录的插件，8080端口打开直接就是页面<code>html-webpack-plugin</code></p>
+<ul>
+<li><p>```js<br>npm i <a href="mailto:&#x68;&#116;&#109;&#108;&#x2d;&#x77;&#101;&#98;&#x70;&#97;&#99;&#107;&#x2d;&#x70;&#x6c;&#x75;&#x67;&#105;&#x6e;&#x40;&#x35;&#46;&#51;&#x2e;&#50;">&#x68;&#116;&#109;&#108;&#x2d;&#x77;&#101;&#98;&#x70;&#97;&#99;&#107;&#x2d;&#x70;&#x6c;&#x75;&#x67;&#105;&#x6e;&#x40;&#x35;&#46;&#51;&#x2e;&#50;</a> -D</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 添加配置文件</span><br><span class="line"></span><br><span class="line">  ```js</span><br><span class="line">  const HP = require(&#x27;html-webpack-plugin&#x27;)</span><br><span class="line">  const htmlPlugin = new HP(</span><br><span class="line">  	template: &#x27;./src/index.html&#x27;,</span><br><span class="line">    	filename: &#x27;./index.html&#x27;</span><br><span class="line">  )</span><br><span class="line">  module.export = &#123;</span><br><span class="line">    plugins: [htmlPlugin]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a><strong>loader</strong></h3><ul>
 <li>打包非js文件时需要加载loader才能正常使用</li>
@@ -1107,14 +1126,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//绑定事件</span><br><span class="line">&lt;button v-on:click=&quot;doThis&quot;&gt;&lt;/button&gt;</span><br><span class="line">等同于</span><br><span class="line">&lt;button @click=&quot;doThis&quot;&gt;&lt;/button&gt;</span><br><span class="line">//对象语法处理多个事件</span><br><span class="line">&lt;button v-on=&quot;&#123; mousedown: doThis, mouseup: doThat &#125;&quot;&gt;&lt;/button&gt;</span><br><span class="line">//事件对象</span><br><span class="line">&lt;button v-on:[event]=&quot;doThis&quot;&gt;&lt;/button&gt;</span><br><span class="line">等同于</span><br><span class="line">&lt;button @[event]=&quot;doThis&quot;&gt;&lt;/button&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>监听冒泡</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//当子组件触发“my-event”时将调用事件处理器</span><br><span class="line">&lt;li @my-event=&quot;handleThis&quot;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>在事件函数中需要<strong>传参</strong>但同时需要<strong>用到事件对象</strong>的时候，采取以下写法</p>
+<li><p>在事件函数中需要<strong>传参</strong>但<strong>同时</strong>需要<strong>用到事件对象</strong>的时候，采取以下写法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click=&#x27;handleThis(10,$event)&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>阻止事件冒泡</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.stop=&#x27;handleThis(10,$event)&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.stop=&#x27;handleThis&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>阻止事件默认行为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a @click.prevent=&#x27;handleThis(10,$event)&#x27;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a @click.prevent=&#x27;handleThis&#x27;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>只执行一次函数，注意的是<strong>事件还可以照常触发，只是不执行函数了</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.once=&#x27;handleThis(10,$event)&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.once=&#x27;handleThis&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>e.target为自身时才能触发执行函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.self=&#x27;handleThis&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>以事件捕获的方式触发当前事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li @click.capture=&#x27;handleThis&#x27;&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>键盘事件</p>
 <ul>
 <li>更多键位可以在<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6">按键修饰符</a>查看</li>
@@ -1187,6 +1210,8 @@
 </li>
 <li><p>计算结构里的函数是不能赋值的，如果需要赋值需要设置set方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;&#123;&#123; name &#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    name:&#123;</span><br><span class="line">      //给计算函数赋的值会传递到set函数中</span><br><span class="line">      set(val)&#123;</span><br><span class="line">        console.log(val)</span><br><span class="line">      &#125;,</span><br><span class="line">        //get函数负责将计算的值提交上去</span><br><span class="line">        get()&#123;</span><br><span class="line">          return 123</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>不需要赋值时可以简写成一个函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;&#123;&#123; name &#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    name()&#123;</span><br><span class="line">      //简写要有返回值</span><br><span class="line">      return 123</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="watch-侦听器结构"><a href="#watch-侦听器结构" class="headerlink" title="watch[侦听器结构]"></a><strong>watch[侦听器结构]</strong></h3><ul>
 <li><p>存放侦听数据变化函数的地方</p>
@@ -1194,7 +1219,7 @@
 
 <ul>
 <li><p>复杂数据侦听</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  watch:&#123;</span><br><span class="line">    name:&#123;</span><br><span class="line">      immediate:true,//立即执行</span><br><span class="line">      deep:true,//深度侦听复杂类型变化(复杂数据里的值变化)</span><br><span class="line">      handler(new,old)&#123;</span><br><span class="line">          </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  watch:&#123;</span><br><span class="line">    name:&#123;</span><br><span class="line">      immediate:true,//加载页面立即执行</span><br><span class="line">      deep:true,//深度侦听复杂类型变化(复杂数据里的值变化)</span><br><span class="line">      handler(new,old)&#123;</span><br><span class="line">          </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>​</p>
 </li>
@@ -1252,6 +1277,10 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	//直接传值</span><br><span class="line">	&lt;Name name=&#x27;...&#x27;&gt;&lt;/Name&gt;</span><br><span class="line">	//变量传递</span><br><span class="line">	&lt;Name :name=&#x27;tamp&#x27;&gt;&lt;/Name&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>在循环中使用？</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	//变量传递</span><br><span class="line">	&lt;Name (v-for=&#x27;value in list&#x27;:key=&#x27;value.id&#x27;):name=&#x27;value.name&#x27;&gt;&lt;/Name&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>props</code>默认值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果需要给定默认值的时候，props可以设置为对象来做到</span></span><br><span class="line"><span class="attr">props</span>:&#123;</span><br><span class="line">  <span class="comment">//变量名</span></span><br><span class="line">  <span class="attr">name</span>:&#123;</span><br><span class="line">    <span class="comment">//设置默认值，优先级较低</span></span><br><span class="line">    <span class="attr">default</span>: <span class="number">0</span></span><br><span class="line">    <span class="comment">//指定name的值数据类型，</span></span><br><span class="line">    <span class="attr">type</span>: string</span><br><span class="line">    <span class="comment">//指定name的值为必传项</span></span><br><span class="line">    <span class="attr">required</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li><p>单向数据流</p>
 <ul>
 <li>单方面向被引入的组件传递数据<ul>
@@ -1262,18 +1291,68 @@
 </li>
 <li><p>子组件向父组件传递参数可以用<strong>自定义事件主动触发</strong>来做到</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	//在父组件里定义一个自定义事件</span><br><span class="line">	&lt;Name @every=&#x27;fn&#x27;&gt;&lt;/Name&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default&#123;</span><br><span class="line">    methods:&#123;</span><br><span class="line">      fn(val)&#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">//在子组件里定义一个需要触发的事件</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;Name @click=&#x27;fn1&#x27;&gt;&lt;/Name&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default&#123;</span><br><span class="line">    methods:&#123;</span><br><span class="line">      fn1()&#123;</span><br><span class="line">        //$emit是一个主动触发事件的方法，格式：$emit(&#x27;需要触发的事件&#x27;，参数)</span><br><span class="line">        this.$emit(&#x27;fn&#x27;,val)</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
 <li><p><strong>EventBus[跨组件通信]</strong></p>
 <ul>
 <li>两个被引入组件之间的数据交互</li>
 <li>原理：通过空白vue文件监听、主动触发、移除事件</li>
 </ul>
 </li>
+<li><p><strong>全局事件总线<code>$bus</code></strong></p>
+<ul>
+<li>为了更方便在<strong>被引入组件之间进行数据交互</strong></li>
+<li>原理：在Vue实例的<code>prototype</code>上挂载一个回调函数，让所有实例化的组件都可以访问到这个回调函数绑定的事件</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">render</span>: <span class="function">(<span class="params">h</span>) =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">  <span class="comment">//在创建实例之前挂载这个事件</span></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="variable language_">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;).$mount(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在需要数据的组件里给<code>$bus</code>绑定事件，接受数据</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;event&#x27;</span>,<span class="function"><span class="params">val</span>=&gt;</span>val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>让传递数据的组件触发<code>$bus</code>绑定的事件，将数据作为参数传递过去</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;event&#x27;</span>,val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后在该组件被销毁时移除该事件</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">beforeDestroy</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">$bus</span>.$off(<span class="string">&#x27;event&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  ​</p>
+</li>
+</ul>
+</li>
+<li><p><strong>style样式污染</strong></p>
+<ul>
+<li><p>组件之间会存在样式冲突的情况，原理是vue的页面渲染在同一个页面下的，所以就产生了样式污染</p>
+</li>
+<li><p>解决方案：添加<code>scoped</code>属性让<strong>组件的每个样式都默认添加一个随机数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>/deep/</code> 样式穿透，给父组件具体样式设置，会<strong>影响到该父组件下的所有组件</strong>该样式名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">  /deep/h1&#123;</span><br><span class="line">    color: red</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
 </ul>
 </li>
 </ul>
-<h3 id="filter-过滤器"><a href="#filter-过滤器" class="headerlink" title="filter[过滤器]"></a><strong>filter</strong>[过滤器]</h3><ul>
+<h3 id="mixin-混入结构"><a href="#mixin-混入结构" class="headerlink" title="mixin[混入结构]"></a><strong>mixin[混入结构]</strong></h3><ul>
+<li><p>对于多次复用的数据或者方法，可以单独封装一个<code>js</code> 文件，把复用的方法或属性暴露出来，在用到的地方引入即可</p>
+</li>
+<li><p>使用方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import &#123;calname&#125; from &#x27;./name.js&#x27;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data()&#123;&#125;,</span><br><span class="line">    methods:&#123;&#125;,</span><br><span class="line">    mixin:[calname]</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>name.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> calname = &#123;</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>)&#123;&#125;,</span><br><span class="line">  <span class="attr">methods</span>:&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="filter-过滤器-vue3削弱"><a href="#filter-过滤器-vue3削弱" class="headerlink" title="filter[过滤器]..(vue3削弱)"></a><strong>filter</strong>[过滤器]..(vue3削弱)</h3><ul>
 <li><p>全局过滤<code>main.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在main.js里面编辑使整个vue文件夹都有效</span></span><br><span class="line"><span class="comment">//将字符串转换成数组，翻转数组，转换成字符串，第一个参数为过滤器函数名，第二个是函数本体</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">filter</span>(<span class="string">&#x27;reverse&#x27;</span>, <span class="function">(<span class="params">val,s</span>) =&gt;</span> val.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;s&#x27;</span>))</span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">&lt;li&gt;&#123;&#123;msg | <span class="title function_">reverse</span>(<span class="string">&#x27;|&#x27;</span>)&#125;&#125;&lt;/li&gt;</span><br><span class="line"><span class="comment">//可以传递第二个参数为s的形参，加上括号即可，而多个过滤器使用`|`分隔开就行</span></span><br></pre></td></tr></table></figure></li>
 <li><p>局部过滤</p>
@@ -1342,6 +1421,15 @@
 <h3 id="vue中的axios"><a href="#vue中的axios" class="headerlink" title="vue中的axios"></a><strong>vue中的axios</strong></h3><ul>
 <li><p>axios的全局地址配置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">axios.defaults.baseURL = &#x27;http://localhost:3000&#x27;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>await</code>的使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发起一个axios请求，用async修饰匿名函数</span></span><br><span class="line"><span class="keyword">async</span> ()=&gt;&#123;</span><br><span class="line">  axios的返回值是一个promise实例，但是<span class="keyword">await</span>之后变成了真实的数据，注意<span class="keyword">await</span>必须和<span class="keyword">async</span>一起存在</span><br><span class="line">  <span class="keyword">var</span> msg = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123;...&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="vue中的cors跨域方案"><a href="#vue中的cors跨域方案" class="headerlink" title="vue中的cors跨域方案"></a><strong>vue中的cors跨域方案</strong></h3><blockquote>
+<p><strong>代理服务器</strong>，因为cors原理所以用服务器向另一台异域服务器获取数据</p>
+</blockquote>
+<ul>
+<li><p>在vue配置文件中添加代理服务器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>:&#123;</span><br><span class="line">    <span class="attr">proxy</span>:&#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>:&#123;</span><br><span class="line">        <span class="comment">//请求资源的目标服务器</span></span><br><span class="line">        <span class="attr">target</span>:<span class="string">&#x27;http://localhost:5000&#x27;</span>,</span><br><span class="line">        <span class="attr">pathRewirte</span>:&#123;<span class="string">&#x27;^/api&#x27;</span>:<span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="vue中的dom元素获取"><a href="#vue中的dom元素获取" class="headerlink" title="vue中的dom元素获取"></a><strong>vue中的dom元素获取</strong></h3><ul>
 <li><p>ref</p>
@@ -1353,7 +1441,7 @@
 <li><p>用于动态切换各个组件的指令标签，配合<code>is</code>使用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;component :is=&#x27;name&#x27;&gt;&lt;/component&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import Name from &#x27;./..&#x27;</span><br><span class="line">  data()&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">      name:Name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">    components:&#123;</span><br><span class="line">      Name</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>因为切换组件会导致被频繁的创建和销毁，占用资源，所以可以用到vue内置组件<code>keep-alive</code> 把动态组件包裹起来</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;keep-alive&gt;</span><br><span class="line">  		&lt;component :is=&#x27;name&#x27;&gt;&lt;/component&gt;</span><br><span class="line">	&lt;/keep-alive&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">//include指定组件加入缓存，exclude指定组件不加入缓存，两个属性只能有一个存在</span><br><span class="line">	&lt;keep-alive include=&#x27;Name,Name1&#x27;&gt;</span><br><span class="line">  		&lt;component :is=&#x27;name&#x27;&gt;&lt;/component&gt;</span><br><span class="line">	&lt;/keep-alive&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>在<code>keep-alive</code> 中有两个<strong>钩子函数</strong>，用来确认组件是激活状态和失去激活状态<ul>
@@ -1365,6 +1453,9 @@
 </li>
 </ul>
 <h3 id="slot-组件插槽"><a href="#slot-组件插槽" class="headerlink" title="slot[组件插槽]"></a><strong>slot[组件插槽]</strong></h3><ul>
+<li>在组件页面里面加入一个插槽<code>slot</code> ,引用这个组件时，这个组件标签里面的标签会替换掉<code>slot</code>,并且带有样式</li>
+</ul>
+<ul>
 <li><p>当组件中有一部分标签不确定的时候，可以用插槽来修改</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">      &lt;a&gt;123&lt;/a&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;span&gt;&lt;/span&gt;</span><br><span class="line">  		&lt;/div&gt;</span><br><span class="line">      //在不确定的地方使用slot标签</span><br><span class="line">      &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
 
@@ -1398,7 +1489,7 @@
 <p>​</p>
 </li>
 <li><p>局部注册</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  export default&#123;</span><br><span class="line">    directives:&#123;</span><br><span class="line">      name:&#123;</span><br><span class="line">        inserted(el)&#123;</span><br><span class="line">          console.log(el)//el是调用这个指令的dom元素</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  export default&#123;</span><br><span class="line">    directives:&#123;</span><br><span class="line">      name:&#123;</span><br><span class="line">        //元素被绑定时立即生效，执行一次，el后面可以跟一个形参为指令=后面的值</span><br><span class="line">        mouted(el)&#123;</span><br><span class="line">          console.log(el)//el是调用这个指令的dom元素</span><br><span class="line">        &#125;,</span><br><span class="line">        //元素被发生变化时生效，每次改变都生效</span><br><span class="line">        updated(el)&#123;</span><br><span class="line">          console.log(el)//el是调用这个指令的dom元素</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="vue-router插件"><a href="#vue-router插件" class="headerlink" title="vue-router插件"></a><strong>vue-router插件</strong></h3><ul>
 <li><p>路由插件</p>
@@ -1645,7 +1736,10 @@
 <li><p>事件执行完之后才能下一次操作</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">btn.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">if</span> timer <span class="keyword">return</span></span><br><span class="line">  timer = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;此处写节流的事件&#x27;</span>)；</span><br><span class="line">    timer = <span class="literal">null</span>;</span><br><span class="line">  &#125;,<span class="number">600</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="跨域，非同源资源共享"><a href="#跨域，非同源资源共享" class="headerlink" title="跨域，非同源资源共享"></a><strong>跨域，非同源资源共享</strong></h3><h4 id="jsonp技术-仅适用get请求"><a href="#jsonp技术-仅适用get请求" class="headerlink" title="jsonp技术[仅适用get请求]"></a><strong>jsonp技术</strong>[仅适用get请求]</h4><p>json with padding<br>​    在客户端创建一个带地址的<code>script</code>标，地址为访问地址</p>
+<h3 id="跨域，非同源资源共享"><a href="#跨域，非同源资源共享" class="headerlink" title="跨域，非同源资源共享"></a><strong>跨域，非同源资源共享</strong></h3><p><strong>服务器端设置允许所有客户端跨域请求</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>,<span class="string">&#x27;*&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="jsonp技术-仅适用get请求"><a href="#jsonp技术-仅适用get请求" class="headerlink" title="jsonp技术[仅适用get请求]"></a><strong>jsonp技术</strong>[仅适用get请求]</h4><p>json with padding<br>​    在客户端创建一个带地址的<code>script</code>标，地址为访问地址</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span> = <span class="string">&#x27;http://localhost:3001/test?callback=fn&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>​    在这个<code>script</code>标签前面定义一个函数</p>
@@ -1699,9 +1793,9 @@
 <ul>
 <li><p><code>fs</code> [<strong>文件读写功能</strong>]</p>
 <ul>
-<li><p><code>fs.readFile</code>[<strong>读取文件</strong>]</p>
+<li><p><code>readFile</code>[<strong>读取文件</strong>]</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">//回调函数里包括err，datastr两个参数，err代表出错的错误信息，正常为null，datastr为读取的内容</span></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;路径加文件名加后缀&#x27;</span>，<span class="string">&#x27;编码格式&#x27;</span>，<span class="string">&#x27;callback&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p><code>fs.writeFile</code>[<strong>书写文件</strong>]</p>
+<li><p><code>writeFile</code>[<strong>书写文件</strong>]</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">//创建一个新的文件，如果文件已存在则覆盖内容，回调函数里只有err一个参数，代表出错的错误信息</span></span><br><span class="line">fs.<span class="title function_">writeFile</span>(<span class="string">&#x27;路径加文件名加后缀&#x27;</span>，<span class="string">&#x27;编码格式(默认utf-8)&#x27;</span>，<span class="string">&#x27;callback&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
@@ -1715,9 +1809,104 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line">conlose.<span class="title function_">log</span>(path.<span class="title function_">extname</span>(<span class="string">&#x27;./a/b.txt&#x27;</span>))<span class="comment">//.txt</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li><p><code>http</code>[服务器模块]</p>
+</li>
+<li><p><code>querystring</code> [数据转换模块]</p>
+</li>
+</ul>
+<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a><strong>第三方模块</strong></h3><ul>
+<li><p><code>express</code> 服务器模块</p>
+<ul>
+<li><code>express.Router</code> 路由模块</li>
+</ul>
+</li>
+<li><p><code>body-parser</code> 解析请求数据的模块</p>
+<ul>
+<li><p>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bdps = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line"><span class="comment">//解析json字符串到req.body里面</span></span><br><span class="line">app.<span class="title function_">use</span>(bdps.<span class="title function_">urlencoded</span>(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;))</span><br><span class="line"><span class="comment">//解析json对象到req.body里面</span></span><br><span class="line">app.<span class="title function_">use</span>(bdps.<span class="title function_">json</span>())</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>mysql</code> 数据库模块</p>
+<ul>
+<li><p><code>mysql.createPool</code>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&#x27;mysql&#x27;</span>)</span><br><span class="line"><span class="comment">//连接数据库</span></span><br><span class="line"><span class="keyword">const</span> db = mysql.<span class="title function_">createPool</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">  <span class="attr">user</span>: <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&#x27;admin123&#x27;</span>,</span><br><span class="line">  <span class="attr">database</span>: <span class="string">&#x27;my_db_01&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line">db.<span class="title function_">query</span>(<span class="string">&#x27;select 1&#x27;</span>,<span class="function">(<span class="params">err, res</span>)=&gt;</span> res)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>cors</code> 跨域模块</p>
+<ul>
+<li><p>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许跨域资源共享</span></span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>)</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>())</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>express-session</code> cookie验证模块</p>
+<ul>
+<li>由于cookie具有自动发送的特点，所以用session来做验证，一般用于<strong>服务器端渲染的web开发模式</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>)</span><br><span class="line">app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">session</span>(&#123;</span><br><span class="line">    <span class="attr">secret</span>: <span class="string">&#x27;itheima&#x27;</span>,<span class="comment">//定义密钥</span></span><br><span class="line">    <span class="attr">resave</span>: <span class="literal">false</span>,<span class="comment">//改变规则为不在服务器储存数据</span></span><br><span class="line">    <span class="attr">saveUninitialized</span>:<span class="literal">true</span><span class="comment">//固定写法</span></span><br><span class="line">  &#125;)</span><br><span class="line">)</span><br><span class="line"><span class="comment">//使用session中间件后，req里面会出现session属性，用它配置登录状态和用户的信息</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/login&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//用户名及密码正确时添加session里的属性</span></span><br><span class="line">    <span class="keyword">if</span>(req.<span class="property">query</span>.<span class="property">uname</span>===<span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">        req.<span class="property">session</span>.<span class="property">user</span> = req.<span class="property">body</span><span class="comment">//设置用户信息</span></span><br><span class="line">        req.<span class="property">session</span>.<span class="property">istrue</span> = <span class="literal">true</span><span class="comment">//设置用户登录状态</span></span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/info&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//通过session.istrue验证用户是否是登录状态</span></span><br><span class="line">    <span class="keyword">if</span>(req.<span class="property">session</span>.<span class="property">istrue</span>)&#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&#x27;false&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/exit&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//当用户退出登录时，移除session上的信息</span></span><br><span class="line">    req.<span class="property">session</span>.<span class="title function_">destroy</span>()</span><br><span class="line">    res.<span class="title function_">send</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p><code>jsonwebtoken</code> JWT验证模块</p>
+<ul>
+<li><p>用加密的token来验证用户的状态，一般用于<strong>前后端分离的web开发模式</strong></p>
+</li>
+<li><p>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">&#x27;jsonwebtoken&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jwt_str = <span class="string">&#x27;pppp&#x27;</span><span class="comment">//密钥</span></span><br><span class="line">app.<span class="property">app</span>.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//生成密钥token</span></span><br><span class="line">    <span class="keyword">let</span> token = jwt.<span class="title function_">sign</span>(&#123;<span class="attr">uname</span>:req.<span class="property">query</span>.<span class="property">uname</span>&#125;,jwt_str,&#123;<span class="attr">expiresIn</span>:<span class="string">&#x27;30s&#x27;</span>&#125;)</span><br><span class="line">    res.<span class="title function_">send</span>(&#123;</span><br><span class="line">        <span class="attr">data</span>:<span class="string">&#x27;ok&#x27;</span>,</span><br><span class="line">        token,</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>express-jwt</code> 解析JWT加密数据的模块</p>
+<ul>
+<li><p>将加密的token解析成json对象</p>
+</li>
+<li><p>使用方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> expressJWT = <span class="built_in">require</span>(<span class="string">&#x27;express-jwt&#x27;</span>)</span><br><span class="line"><span class="comment">//使用这个中间件将token还原成json对象，并挂载到req.user上，unless代表忽略规则，此处代表api开头的路径都必须带token</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">expressJWT</span>(&#123; <span class="attr">secret</span>: secretKey &#125;).<span class="title function_">unless</span>(&#123; <span class="attr">path</span>: [<span class="regexp">/^\/api\//</span>] &#125;))</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><code>@hapi/joi</code> 验证规则模块</p>
+</li>
+<li><p><code>bcryptjs</code> 密码处理模块</p>
+</li>
+<li><p><code>@escook/express-joi</code> 数据验证模块</p>
+</li>
+<li><p>​</p>
+</li>
+</ul>
+<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a><strong>Mysql</strong></h2><h3 id="编辑指令操作"><a href="#编辑指令操作" class="headerlink" title="编辑指令操作"></a><strong>编辑指令操作</strong></h3><ul>
+<li><p>选中表格</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM formname</span><br></pre></td></tr></table></figure></li>
+<li><p>选中表格中的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT msg,msg1,msg2 FROM formname</span><br></pre></td></tr></table></figure></li>
+<li><p>新增表格里的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO formname (msg,msg1,msg2) VALUES (&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;)</span><br></pre></td></tr></table></figure></li>
+<li><p>修改表格里的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE formname SET msg=&#x27;a&#x27; WHERE Id=1</span><br></pre></td></tr></table></figure></li>
+<li><p>删除表格里的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM formname WHERE Id=1</span><br></pre></td></tr></table></figure></li>
+<li><p>选择语句<code>WHERE</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- LIKE 模糊匹配</span><br><span class="line">SELECT * FROM formname WHERE msg LIKE &#x27;0;&#x27;</span><br><span class="line">-- AND 并且</span><br><span class="line">SELECT * FROM formname WHERE msg=&#x27;a&#x27; AND Id=1</span><br><span class="line">-- OR 或者</span><br><span class="line">SELECT * FROM formname WHERE msg=&#x27;a&#x27; OR Id=1</span><br></pre></td></tr></table></figure></li>
+<li><p>表格数据排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM formname ORDER BY Id DESC, msg ASC</span><br></pre></td></tr></table></figure></li>
+<li><p>查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) AS num FROM user WHERE Id&gt;2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="node-js中的数据库"><a href="#node-js中的数据库" class="headerlink" title="node.js中的数据库"></a><strong>node.js中的数据库</strong></h3><ul>
+<li><p>链接数据库</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//下载MySQL模块，并引入</span></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">&quot;mysql&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> db = mysql.<span class="title function_">createPool</span>(&#123;</span><br><span class="line">  <span class="attr">host</span>: <span class="string">&quot;127.0.0.1&quot;</span>,<span class="comment">//数据库的地址</span></span><br><span class="line">  <span class="attr">user</span>: <span class="string">&quot;root&quot;</span>,<span class="comment">//登录名</span></span><br><span class="line">  <span class="attr">password</span>: <span class="string">&quot;root&quot;</span>,<span class="comment">//登录密码</span></span><br><span class="line">  <span class="attr">database</span>: <span class="string">&quot;sql1&quot;</span>,<span class="comment">//数据库的名称</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>查询数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">query</span>(<span class="string">&#x27;SELECT uname FROM user WHERE uname=&quot;a&quot;&#x27;</span>,<span class="function">(<span class="params">err,res</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>添加数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> head = <span class="string">&quot;INSERT INTO user SET ? &quot;</span>;</span><br><span class="line"><span class="keyword">let</span> msg = &#123; <span class="attr">uname</span>: <span class="string">&quot;e&quot;</span>, <span class="attr">password</span>: <span class="string">&quot;eee&quot;</span>, <span class="attr">email</span>: <span class="string">&quot;eeee&quot;</span> &#125;;</span><br><span class="line"> db.<span class="title function_">query</span>(head, msg, <span class="function">(<span class="params">err, res</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>修改数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> head = <span class="string">&#x27;UPDATE user SET ? WHERE Id=?&#x27;</span></span><br><span class="line"><span class="keyword">let</span> msg = &#123;<span class="title class_">Id</span>:<span class="number">2</span>,<span class="attr">uname</span>:<span class="string">&#x27;1&#x27;</span>,<span class="attr">password</span>:<span class="string">&#x27;1&#x27;</span>,<span class="attr">email</span>:<span class="string">&#x27;1&#x27;</span>&#125;</span><br><span class="line">db.<span class="title function_">query</span>(head,[msg,msg.<span class="property">Id</span>],<span class="function">(<span class="params">err,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>删除数据，不建议直接删除数据，一般采用标记删除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">query</span>(<span class="string">&#x27;UPDATE user SET del=1 WHERE Id=?&#x27;</span>,<span class="number">6</span>,<span class="function">(<span class="params">err,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
 </ul>
 <h2 id="常见问题及解决方案"><a href="#常见问题及解决方案" class="headerlink" title="常见问题及解决方案"></a><strong>常见问题及解决方案</strong></h2><h3 id="流式布局（百分比布局）"><a href="#流式布局（百分比布局）" class="headerlink" title="流式布局（百分比布局）"></a><strong>流式布局（百分比布局</strong>）</h3><p>流式布局应***<u>高度固定</u><em><strong>，</strong></em><u>宽度百分比</u>***来确定位置</p>
-<h3 id="form里面按钮的默认提交"><a href="#form里面按钮的默认提交" class="headerlink" title="form里面按钮的默认提交"></a><strong>form里面按钮的默认提交</strong></h3><h3 id="padding、margin多个值的方向问题"><a href="#padding、margin多个值的方向问题" class="headerlink" title="padding、margin多个值的方向问题"></a><strong>padding、margin多个值的方向问题</strong></h3><p>当其为三个值时方向为：上，左右，下。<br>当其为四个值时方向为：上、右、下、左。</p>
+<h3 id="form里面按钮的btnclick默认提交"><a href="#form里面按钮的btnclick默认提交" class="headerlink" title="form里面按钮的btnclick默认提交"></a><strong>form里面按钮的</strong>btnclick<strong>默认提交</strong></h3><h3 id="padding、margin多个值的方向问题"><a href="#padding、margin多个值的方向问题" class="headerlink" title="padding、margin多个值的方向问题"></a><strong>padding、margin多个值的方向问题</strong></h3><p>当其为三个值时方向为：上，左右，下。<br>当其为四个值时方向为：上、右、下、左。</p>
 <h3 id="Easy-Less插件"><a href="#Easy-Less插件" class="headerlink" title="Easy Less插件"></a><strong>Easy Less插件</strong></h3><p>在vs code中添加该插件，可编辑less文件生成css样式表<br>在该插件中可添加css存放路径</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;less.compile&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    </span><br><span class="line">        <span class="attr">&quot;out&quot;</span><span class="punctuation">:</span> <span class="string">&quot;../css/&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -1748,7 +1937,7 @@
 <li><p>update钩子函数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  updated()&#123;</span><br><span class="line">    console.log(this.$refs.name.innerHTML)</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p>$nextTick()</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  methods:&#123;</span><br><span class="line">    //在引起改变的事件里面获取</span><br><span class="line">    fn()&#123;</span><br><span class="line">    this.$nextTick(()=&gt;&#123;</span><br><span class="line">    console.log(this.$refs.name.innerHTML)</span><br><span class="line">  &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  methods:&#123;</span><br><span class="line">    //nextTick会把函数内的代码回调到下一个dom更新周期后执行，保证页面数据的一致性</span><br><span class="line">    fn()&#123;</span><br><span class="line">    this.$nextTick(()=&gt;&#123;</span><br><span class="line">    console.log(this.$refs.name.innerHTML)</span><br><span class="line">  &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <p>​</p>
 </li>
